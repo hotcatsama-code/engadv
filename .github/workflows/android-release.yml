@@ -33,21 +33,25 @@ jobs:
 
       - name: Install Android SDK Command-line Tools
         run: |
+          set -euo pipefail
           ANDROID_HOME=$HOME/android-sdk
           ANDROID_SDK_ROOT=$ANDROID_HOME
           mkdir -p "$ANDROID_HOME/cmdline-tools"
           cd "$ANDROID_HOME/cmdline-tools"
           curl -L -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
-          unzip -q commandlinetools.zip -d tools
+          # The zip contains a top-level "cmdline-tools" dir; move it to "latest" as required by the SDK layout
+          unzip -q commandlinetools.zip
           rm -f commandlinetools.zip
-          echo "y" | $ANDROID_HOME/cmdline-tools/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses
-          $ANDROID_HOME/cmdline-tools/tools/bin/sdkmanager --sdk_root=$ANDROID_HOME \
+          rm -rf latest || true
+          mv cmdline-tools latest
+          echo "y" | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" --licenses
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --sdk_root="$ANDROID_HOME" \
             "platform-tools" \
             "platforms;android-34" \
             "build-tools;34.0.0"
-          echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
-          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
-          echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
+          echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> "$GITHUB_ENV"
+          echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
 
       - name: Build Release (Unsigned)
         env:
