@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ماجراجویی‌های انگلیسی</string>
+    <string name="game_word_scramble">کلمات درهم</string>
+    <string name="game_word_chain">زنجیره کلمات</string>
+    <string name="game_letter_hop">پرش حروف</string>
+    <string name="settings">تنظیمات</string>
+    <string name="check_answer">بررسی پاسخ</string>
+    <string name="dark_mode">حالت شب</string>
+</resources>

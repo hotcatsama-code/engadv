@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EnglishAdventures</string>
+    <string name="game_word_scramble">Word Scramble</string>
+    <string name="game_word_chain">Word Chain</string>
+    <string name="game_letter_hop">Letter Hop</string>
+    <string name="settings">Settings</string>
+    <string name="check_answer">Check Answer</string>
+    <string name="dark_mode">Dark Mode</string>
+</resources>
